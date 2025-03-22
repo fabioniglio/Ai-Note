@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { shadow } from "@/styles/utils"
 import { Button } from "@/components/ui/button"
+import DarkModeToggle from "./DarkModeToggle";
 
 function Header() {
 
@@ -33,6 +34,7 @@ function Header() {
                 <Link href={"/login"}>Login</Link>
             </Button>
             </>)}
+            <DarkModeToggle />
         </div>
     </header>
   )
