@@ -9,6 +9,9 @@ import { useTransition } from 'react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
+import { createClient } from '@/app/auth/server';
+import { toast } from 'sonner';
+import { loginUserAction, signUpAction } from '@/app/actions/users';
 
 type Props = {
   type: 'login' | 'signUp';
@@ -22,7 +25,43 @@ function AuthForm({ type }: Props) {
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (formData: FormData) => {
-    console.log('form Submitted');
+    startTransition(async () => {
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+
+      let errorMessage;
+      let title;
+      let description;
+
+      if (isLoginForm) {
+        errorMessage = (await loginUserAction(email, password)).errorMessage;
+        title = 'Login In';
+        description = 'You have been logged in successfully';
+      } else {
+        errorMessage = (await signUpAction(email, password)).errorMessage;
+        title = 'Sign Up';
+        description = 'You have been signed up successfully';
+      }
+
+      if (!errorMessage) {
+        toast.success(title, {
+          description,
+        });
+        router.replace('/');
+      } else {
+        toast.error(errorMessage);
+      }
+
+      const supabase = await createClient();
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+      }
+    });
   };
 
   return (
