@@ -5,15 +5,15 @@ import { Button } from './ui/button';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import router from 'next/router';
+import { logOutAction } from '@/app/actions/users';
 
-function LogoutButton() {
+function LogOutButton() {
   const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const {errorMessage} = await logOutAction();
 
-    const errorMessage = null;
 
     if (!errorMessage) {
       toast.success('Logged out successfully');
@@ -39,4 +39,4 @@ function LogoutButton() {
   );
 }
 
-export default LogoutButton;
+export default LogOutButton;

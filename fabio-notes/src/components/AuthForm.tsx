@@ -8,9 +8,11 @@ import { useTransition } from 'react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
-import { createClient } from '@/app/auth/server';
+import { createClient } from '@/lib/server';
 import { toast } from 'sonner';
 import { loginUserAction, signUpAction } from '@/app/actions/users';
+
+import { login, signup } from '../app/login/actions'
 
 type Props = {
   type: 'login' | 'signUp';

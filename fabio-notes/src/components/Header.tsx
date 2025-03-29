@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { shadow } from '@/styles/utils';
 import { Button } from '@/components/ui/button';
 import DarkModeToggle from './DarkModeToggle';
-import LogoutButton from './LogoutButton';
-import { getUser } from '@/app/auth/server';
+import LogOutButton from './LogOutButton';
+import { getUser } from '@/lib/server';
 
 async function Header() {
   const user = await getUser();
@@ -32,7 +32,7 @@ async function Header() {
 
       <div className="flex gap-4">
         {user ? (
-          <LogoutButton />
+          <LogOutButton />
         ) : (
           <>
             <Button asChild className="hidden sm:block">

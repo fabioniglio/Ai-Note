@@ -2,6 +2,7 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { login, signup } from './actions'
+import AuthForm from '@/components/AuthForm';
 
 function LoginPage() {
   return (
@@ -10,15 +11,15 @@ function LoginPage() {
         <CardHeader className="mb-4">
           <CardTitle className="text-center text-3xl">Login</CardTitle>
         </CardHeader>
-        {/* <AuthForm type="login" /> */}
-        <form>
+        <AuthForm type="login" />
+        {/* <form>
       <label htmlFor="email">Email:</label>
       <input id="email" name="email" type="email" required />
       <label htmlFor="password">Password:</label>
       <input id="password" name="password" type="password" required />
       <button formAction={login}>Log in</button>
       <button formAction={signup}>Sign up</button>
-    </form>
+    </form> */}
       </Card>
     </div>
   );
